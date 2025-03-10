@@ -1,1 +1,57 @@
-<h1<Ez az en oldalam Anett</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Vega-Lite Bar Chart</title>
+    <link rel="stylesheet" href="style.css">
+        <!-- Import Vega & Vega-Lite libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Department Budget Distribution</h1>
+        <div id="vis"></div>
+    </div>
+    <script>
+        const spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "description": "Department budget distribution",
+            "width": 400,
+            "height": 300,
+            "data": {
+                "url": "data.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "mark": {
+                "type": "bar",
+                "color": "#4e79a7",
+                "cornerRadius": 4
+            },
+            "encoding": {
+                "x": {
+                    "field": "category",
+                    "type": "nominal",
+                    "axis": {"title": "Department"}
+                },
+                "y": {
+                    "field": "value",
+                    "type": "quantitative",
+                    "axis": {"title": "Budget ($)"}
+                },
+                "tooltip": [
+                    {"field": "category", "type": "nominal", "title": "Department"},
+                    {"field": "value", "type": "quantitative", "title": "Budget", "format": ",.0f"}
+                ]
+            }
+        };
+
+        vegaEmbed('#vis', spec);
+    </script>
+</body>
+
+</html> 
